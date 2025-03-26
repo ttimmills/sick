@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 
-const transformer: ts.TransformerFactory<ts.SourceFile> = context => {
+let transformer: ts.TransformerFactory<ts.SourceFile> = context => {
   return sourceFile => {
-    const visitor = (node: ts.Node): ts.Node | undefined => {
+    let visitor = (node: ts.Node): ts.Node | undefined => {
       if (ts.isImportDeclaration(node)) {
         return undefined;
       }
@@ -10,7 +10,7 @@ const transformer: ts.TransformerFactory<ts.SourceFile> = context => {
       return ts.visitEachChild(node, visitor, context);
     };
 
-    const sourceFileVisitor = (sourceFile: ts.SourceFile): ts.SourceFile => {
+    let sourceFileVisitor = (sourceFile: ts.SourceFile): ts.SourceFile => {
       return ts.visitEachChild(sourceFile, visitor, context);
     };
 
