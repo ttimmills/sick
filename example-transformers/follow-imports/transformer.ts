@@ -1,13 +1,13 @@
 import * as ts from 'typescript';
 
-let transformerProgram = (program: ts.Program) => {
-  let transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
+const transformerProgram = (program: ts.Program) => {
+  const transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
     return sourceFile => {
-      let visitor = (node: ts.Node): ts.Node => {
+      const visitor = (node: ts.Node): ts.Node => {
         if (ts.isImportDeclaration(node) && ts.isStringLiteral(node.moduleSpecifier)) {
-          let typeChecker = program.getTypeChecker();
-          let importSymbol = typeChecker.getSymbolAtLocation(node.moduleSpecifier)!;
-          let exportSymbols = typeChecker.getExportsOfModule(importSymbol);
+          const typeChecker = program.getTypeChecker();
+          const importSymbol = typeChecker.getSymbolAtLocation(node.moduleSpecifier)!;
+          const exportSymbols = typeChecker.getExportsOfModule(importSymbol);
 
           exportSymbols.forEach(symbol =>
             console.log(
