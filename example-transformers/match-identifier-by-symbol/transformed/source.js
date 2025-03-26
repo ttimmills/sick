@@ -1,6 +1,6 @@
 let foo = 1;
 foo = 2;
 {
-    const foo = 'abcd';
+    var foo = 'abcd';
 }
 foo = 3;
