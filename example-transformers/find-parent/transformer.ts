@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-const findParent = (node: ts.Node, predicate: (node: ts.Node) => boolean) => {
+let findParent = (node: ts.Node, predicate: (node: ts.Node) => boolean) => {
   if (!node.parent) {
     return undefined;
   }
@@ -12,11 +12,11 @@ const findParent = (node: ts.Node, predicate: (node: ts.Node) => boolean) => {
   return findParent(node.parent, predicate);
 };
 
-const transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
+let transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
   return sourceFile => {
-    const visitor = (node: ts.Node): ts.Node => {
+    let visitor = (node: ts.Node): ts.Node => {
       if (ts.isStringLiteral(node)) {
-        const parent = findParent(node, ts.isFunctionDeclaration);
+        let parent = findParent(node, ts.isFunctionDeclaration);
         if (parent) {
           console.log('string literal has a function declaration parent');
         }
