@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 
-let transformer: ts.TransformerFactory<ts.SourceFile> = () => {
+const transformer: ts.TransformerFactory<ts.SourceFile> = () => {
   return sourceFile => {
     return ts.factory.updateSourceFile(sourceFile, [
       ts.factory.createImportDeclaration(
