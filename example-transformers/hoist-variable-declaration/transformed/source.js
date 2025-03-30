@@ -1,5 +1,5 @@
 function functionOne() {
     var innerOne, innerTwo;
-    let innerOne = true;
-    let innerTwo = true;
+    const innerOne = true;
+    const innerTwo = true;
 }
