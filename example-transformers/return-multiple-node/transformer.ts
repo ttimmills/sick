@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 
-let transformer: ts.TransformerFactory<ts.SourceFile> = context => {
+const transformer: ts.TransformerFactory<ts.SourceFile> = context => {
   return sourceFile => {
-    let visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
+    const visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
       // If it is a expression statement,
       if (ts.isExpressionStatement(node)) {
         // Return it twice.
