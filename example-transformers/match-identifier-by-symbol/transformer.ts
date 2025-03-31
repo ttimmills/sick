@@ -1,20 +1,20 @@
 import * as ts from 'typescript';
 
-let transformerProgram = (program: ts.Program) => {
-  let typeChecker = program.getTypeChecker();
+const transformerProgram = (program: ts.Program) => {
+  const typeChecker = program.getTypeChecker();
 
   // Create array of found symbols
-  let foundSymbols = new Array<ts.Symbol>();
+  const foundSymbols = new Array<ts.Symbol>();
 
-  let transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
+  const transformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
     return sourceFile => {
-      let visitor = (node: ts.Node): ts.Node => {
+      const visitor = (node: ts.Node): ts.Node => {
         if (ts.isIdentifier(node)) {
-          let relatedSymbol = typeChecker.getSymbolAtLocation(node)!;
+          const relatedSymbol = typeChecker.getSymbolAtLocation(node)!;
 
           // Check if array already contains same symbol - check by reference
           if (foundSymbols.includes(relatedSymbol)) {
-            let foundIndex = foundSymbols.indexOf(relatedSymbol);
+            const foundIndex = foundSymbols.indexOf(relatedSymbol);
             console.log(
               `Found existing symbol at position = ${foundIndex} and name = "${relatedSymbol.name}"`
             );
