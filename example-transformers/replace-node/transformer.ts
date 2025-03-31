@@ -1,8 +1,8 @@
 import * as ts from 'typescript';
 
-let transformer: ts.TransformerFactory<ts.SourceFile> = context => {
+const transformer: ts.TransformerFactory<ts.SourceFile> = context => {
   return sourceFile => {
-    let visitor = (node: ts.Node): ts.Node => {
+    const visitor = (node: ts.Node): ts.Node => {
       if (ts.isFunctionDeclaration(node)) {
         // Will replace any function it finds with an arrow function.
         return ts.factory.createVariableDeclarationList(
